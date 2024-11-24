@@ -61,8 +61,12 @@
                 <i class="tit">电子邮箱</i><a href="javascript:void(0);"></a>
               </li>
               <li>
-                <i class="tit">我的性别</i
-                ><a id="my_sex">男<!--<em class="ml10">[修改]</em>--></a>
+                <i class="tit">我的性别</i>
+                <a id="my_sex">
+                  <span v-if="userSex === 0">男</span>
+                  <span v-else>女</span>
+                  <!--<em class="ml10">[修改]</em>-->
+                </a>
               </li>
             </ul>
           </div>
@@ -100,6 +104,7 @@ export default {
     const state = reactive({
       userPhoto: "",
       nickName: "",
+      userSex: "",
       baseUrl: process.env.VUE_APP_BASE_API_URL,
       imgBaseUrl: process.env.VUE_APP_BASE_IMG_URL,
     });
@@ -108,6 +113,7 @@ export default {
       const { data } = await getUserinfo();
       state.userPhoto = data.userPhoto;
       state.nickName = data.nickName;
+      state.userSex = data.userSex;
     });
 
     const beforeAvatarUpload = (rawFile) => {
